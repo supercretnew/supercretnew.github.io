@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио ShadeCity - разработчика, специализирующегося на Python, Lua, веб-технологиях и AI-решениях">
+    <title>ShadeCity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+    font-family: 'BatmanForever';
+    src: url('batmanforeveralternatecyr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Добавьте это для лучшей производительности */
+}
+        
+        :root {
+            --primary-color: #0c0c14;
+            --secondary-color: #ff8b00;
+            --accent-color: #ff003c;
+            --light-color: #1a1a2e;
+            --dark-color: #050508;
+            --text-color: #e6e6e6;
+            --text-light: #a0a0a0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --batman-yellow: #ffcf00;
+            --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+    font-family: 'BatmanForever', 'Orbitron', sans-serif;
+            background-color: var(--primary-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(28, 28, 48, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(28, 28, 48, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(28, 28, 48, 0.7) 0%, transparent 25%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            color: var(--batman-yellow);
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: var(--neon-glow);
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--secondary-color);
+        }
+        
+        h3 {
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, var(--secondary-color), #ff6b00);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .btn-outline:hover {
+            background: linear-gradient(135deg, var(--secondary-color), #ff6b00);
+            color: var(--primary-color);
+        }
+        
+        header {
+            background-color: rgba(12, 12, 20, 0.9);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        header.scrolled {
+            padding: 15px 0;
+            background-color: rgba(12, 12, 20, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--batman-yellow);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: var(--neon-glow);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .logo i {
+            font-size: 26px;
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+            box-shadow: 0 0 8px var(--secondary-color);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+            text-shadow: 0 0 8px rgba(255, 139, 0, 0.5);
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            width: 35px;
+            height: 4px;
+            background: var(--batman-yellow);
+            margin: 4px 0;
+            transition: var(--transition);
+            transform-origin: left center;
+            box-shadow: 0 0 5px var(--batman-yellow);
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            background: var(--secondary-color);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            background: var(--secondary-color);
+        }
+        
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #050508 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 139, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 60, 0.1) 0%, transparent 20%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ff8b00' fill-opacity='0.05' d='M0,224L48,213.3C96,203,192,181,288,160C384,139,480,117,576,122.7C672,128,768,160,864,170.7C960,181,1056,171,1152,165.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover, cover, cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            color: var(--batman-yellow);
+            animation: fadeInUp 1s ease, glow 2s ease-in-out infinite alternate;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+        
+        .hero .btn {
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+        
+        .typed-text {
+            color: var(--secondary-color);
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(255, 139, 0, 0.5);
+        }
+        
+        .about {
+            background-color: var(--light-color);
+            background-image: 
+                radial-gradient(circle at 75% 25%, rgba(40, 40, 65, 0.7) 0%, transparent 30%),
+                radial-gradient(circle at 25% 75%, rgba(40, 40, 65, 0.7) 0%, transparent 30%);
+            position: relative;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0 35px;
+        }
+        
+        .skill {
+            background: linear-gradient(135deg, var(--primary-color), var(--light-color));
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 139, 0, 0.3);
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .skill:hover {
+            background: linear-gradient(135deg, var(--secondary-color), #ff6b00);
+            color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 139, 0, 0.4);
+            border-color: transparent;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--primary-color), var(--light-color));
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 139, 0, 0.2);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--batman-yellow), var(--secondary-color), var(--accent-color), var(--batman-yellow));
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: gradientShift 3s ease infinite;
+            border-radius: var(--border-radius);
+        }
+        
+        .about-image:hover {
+            transform: translateY(-10px);
+        }
+        
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--light-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 70px;
+            color: var(--batman-yellow);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            border: 2px solid rgba(255, 207, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+            transform: rotate(45deg);
+        }
+        
+        .about-image:hover .avatar {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(255, 207, 0, 0.5);
+        }
+        
+        .projects {
+            background-color: var(--primary-color);
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(28, 28, 48, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 75% 75%, rgba(28, 28, 48, 0.7) 0%, transparent 25%);
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+        }
+        
+        .project-card {
+            background: linear-gradient(135deg, var(--light-color), var(--primary-color));
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 139, 0, 0.2);
+            position: relative;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--batman-yellow), var(--secondary-color), var(--accent-color));
+            z-index: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .project-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.08);
+        }
+        
+        .project-info {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            color: var(--batman-yellow);
+        }
+        
+        .project-info p {
+            margin-bottom: 25px;
+            flex-grow: 1;
+            color: var(--text-light);
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .project-tag {
+            background: rgba(255, 139, 0, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            border: 1px solid rgba(255, 139, 0, 0.3);
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, var(--light-color), var(--primary-color));
+            text-align: center;
+            position: relative;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--light-color));
+            color: var(--batman-yellow);
+            border-radius: 50%;
+            font-size: 28px;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 207, 0, 0.3);
+            box-shadow: var(--shadow);
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--batman-yellow), var(--secondary-color));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0;
+        }
+        
+        .social-link i {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 139, 0, 0.3);
+            color: var(--primary-color);
+        }
+        
+        .social-link:hover::before {
+            opacity: 1;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--batman-yellow), var(--secondary-color), var(--accent-color));
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), #ff6b00);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: var(--shadow);
+            border: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 139, 0, 0.4);
+        }
+        
+        .particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .content-over-particle {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 207, 0, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 207, 0, 0.8), 0 0 30px rgba(255, 207, 0, 0.6);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.3rem;
+            }
+            
+            h3 {
+                font-size: 1.7rem;
+            }
+            
+            .hero {
+                padding-top: 160px;
+                padding-bottom: 100px;
+            }
+            
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                background: rgba(12, 12, 20, 0.95);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                transition: 0.4s ease;
+                box-shadow: var(--shadow-hover);
+                padding: 40px 0;
+                height: calc(100vh - 80px);
+                justify-content: flex-start;
+                gap: 40px;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.3rem;
+                padding: 12px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-image {
+                height: 380px;
+                margin-top: 50px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+            
+            .about-image {
+                height: 320px;
+            }
+            
+            .avatar {
+                width: 140px;
+                height: 140px;
+                font-size: 55px;
+            }
+            
+            .social-link {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo batman-font">
+                    <i class="fas fa-batman"></i>Shade<span>City</span>
+                </a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="batman-font">Главная</a></li>
+                    <li><a href="#about" class="batman-font">Обо мне</a></li>
+                    <li><a href="#projects" class="batman-font">Проекты</a></li>
+                    <li><a href="#contact" class="batman-font">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div id="particles-js" class="particles-js"></div>
+        <div class="container content-over-particle">
+            <div class="hero-content">
+                <h1>ДОБРО ПОЖАЛОВАТЬ В SHADECITY</h1>
+                <p>Я разработчик, специализирующийся на <span class="typed-text batman-font" id="typed-text"></span></p>
+                <a href="#projects" class="btn batman-font">Посмотреть проекты</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="batman-font">Обо мне</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>Привет! Меня зовут Shade, и я занимаюсь разработкой программного обеспечения. Моя специализация включает работу с PHP, Python, Lua, HTML, CSS, JavaScript, C и C#.</p>
+                    <p>Я увлечен созданием инновационных решений, особенно в области искусственного интеллекта и веб-технологий. Мне нравится решать сложные задачи и создавать продукты, которые приносят пользу пользователям.</p>
+                    
+                    <h3 class="batman-font">Мои навыки</h3>
+                    <div class="skills">
+                        <span class="skill batman-font">Python</span>
+                        <span class="skill batman-font">Lua</span>
+                        <span class="skill batman-font">HTML/CSS</span>
+                        <span class="skill batman-font">JavaScript</span>
+                        <span class="skill batman-font">C</span>
+                        <span class="skill batman-font">C#</span>
+                        <span class="skill batman-font">Web</span>
+                        <span class="skill batman-font">PHP</span>
+                    </div>
+                    
+                    <a href="#contact" class="btn batman-font">Связаться со мной</a>
+                </div>
+                <div class="about-image fade-in">
+                    <div class="avatar">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="batman-font">Shade</h3>
+                    <p>Веб-разработчик</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="batman-font">Мои проекты</h2>
+                <p>Здесь представлены некоторые из моих недавних работ. Каждый проект уникален и создан с вниманием к деталям.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://www.dropbox.com/scl/fi/o33k42xogjxcy6hyunu3d/IMG_20250906_220157.png?rlkey=bphecm5c6qyien342sbwyxdim&st=m1dbcsee&dl=1" alt="AIHAM проект">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="batman-font">AIHAM</h3>
+                        <p>Телеграмм бот с встроенной агрессивной нейросети.</p>
+                        <div class="project-tags">
+                            <span class="project-tag batman-font">PHP</span>
+                        </div>
+                        <a href="https://t.me/supercretaibot" target="_blank" class="btn batman-font">Посмотреть проект</a>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://www.dropbox.com/scl/fi/7buzusqrm9ykxh64li78q/file_00000000dfac6246888ba0f2e996934f.png?rlkey=o4ciddhcty0fw5vk91zgx04l1&st=ew0xam8t&dl=1" alt="SupercretAI проект">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="batman-font">SupercretAI</h3>
+                        <p>Телеграмм бот с встроенной нейросетью.</p>
+                        <div class="project-tags">
+                            <span class="project-tag batman-font">PHP</span>
+                        </div>
+                        <a href="#" target="_blank" class="btn btn-outline batman-font">Заморожен</a>
+                    </div>
+                </div>
+                 
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background: linear-gradient(45deg, #9b59b6, #e74c3c); color: white;">
+                        <i class="fas fa-laptop-code" style="font-size: 70px;"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="batman-font">Веб-Игра</h3>
+                        <p>Щас я думаю что сделать за игру, пока идей нету.</p>
+                        <div class="project-tags">
+                            <span class="project-tag batman-font">HTML/CSS</span>
+                            <span class="project-tag batman-font">JavaScript</span>
+                            <span class="project-tag batman-font">Web-Game</span>
+                        </div>
+                        <a href="#" class="btn btn-outline batman-font">Заморожен/нету идей</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="batman-font">Мои аккаунты</h2>
+                <p>Писать по делу. Свяжитесь со мной через Telegram</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://t.me/supercretnew" class="social-link" target="_blank" aria-label="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="batman-font">Supercret</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.getElementById('mobile-menu').classList.remove('active');
+                }
+            });
+        });
+        
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = event.target.closest('nav');
+            const isClickInsideMenu = event.target.closest('.nav-links');
+            const isMenuToggle = event.target.closest('#mobile-menu');
+            
+            if (!isClickInsideNav && !isClickInsideMenu && !isMenuToggle && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+        
+        const typedTextSpan = document.getElementById('typed-text');
+        const textArray = ['Python', 'Lua', 'HTML/CSS', 'JavaScript', 'C#', 'PHP'];
+        const typingDelay = 100;
+        const erasingDelay = 50;
+        const newTextDelay = 1500;
+        let textArrayIndex = 0;
+        let charIndex = 0;
+        
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                setTimeout(erase, newTextDelay);
+            }
+        }
+        
+        function erase() {
+            if (charIndex > 0) {
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } else {
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, typingDelay + 100);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (textArray.length) setTimeout(type, newTextDelay + 100);
+            
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ff8b00" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ff8b00",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body>
+</html>
